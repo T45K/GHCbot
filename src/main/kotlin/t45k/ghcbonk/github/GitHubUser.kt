@@ -1,17 +1,12 @@
 package t45k.ghcbonk.github
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.IOException
-import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.util.stream.Collectors
-import kotlin.streams.toList
 
 
 class GitHubUser(private val userName: String) {
@@ -26,7 +21,7 @@ class GitHubUser(private val userName: String) {
         this.userURL = URL(USER_URL_PREFIX + userName + USER_URL_SUFFIX)
     }
 
-    fun fetchContributionData(): ContributionData? {
+    fun fetchContributionData(): ContributionData {
 
         val connection: HttpURLConnection = setConnection()
         val rawData: Array<String> = fetchRawData(connection)
@@ -55,7 +50,9 @@ class GitHubUser(private val userName: String) {
     private fun readInputStream(inputStream: InputStream): Array<String> {
         val inputStreamReader = InputStreamReader(inputStream)
         val bufferedReader = BufferedReader(inputStreamReader)
-        return bufferedReader.lines().toArray<String> { length -> arrayOfNulls(length)}
+        return bufferedReader.lines()
+                .filter { !isNecessaryInformation(it) }
+                .toArray<String> { length -> arrayOfNulls(length) }
     }
 
     private fun isNecessaryInformation(line: String): Boolean {
