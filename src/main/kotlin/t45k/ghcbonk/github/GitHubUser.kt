@@ -3,6 +3,7 @@ package t45k.ghcbonk.github
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.io.Reader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -49,7 +50,7 @@ class GitHubUser(private val userName: String) {
 
     private fun readInputStream(inputStream: InputStream): Array<String> {
         val inputStreamReader = InputStreamReader(inputStream)
-        val bufferedReader = BufferedReader(inputStreamReader)
+        val bufferedReader = BufferedReader(inputStreamReader as Reader?)
         return bufferedReader.lines()
                 .filter { !isNecessaryInformation(it) }
                 .toArray<String> { length -> arrayOfNulls(length) }
