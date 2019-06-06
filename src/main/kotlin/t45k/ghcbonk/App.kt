@@ -3,8 +3,6 @@
  */
 package t45k.ghcbonk
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import t45k.ghcbonk.github.GitHubUser
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -16,9 +14,6 @@ class App {
         const val TIME_OF_ONE_DAY: Long = 1000 * 60 * 60 * 24
     }
 
-    @Suppress("JAVA_CLASS_ON_COMPANION")
-    val logger = LoggerFactory.getLogger(App.javaClass)
-
     fun main(args: Array<String>) {
         val properties = Properties()
         properties.load(Files.newBufferedReader(Paths.get(args[0])))
@@ -28,7 +23,7 @@ class App {
             override fun run() {
                 val userName = properties.getProperty("userName")
                 val user = GitHubUser(userName)
-                val contributionData = user.featchContributionData()
+                val contributionData = user.fetchContributionData()
             }
         }
 
