@@ -9,7 +9,6 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class GitHubUser(private val userName: String) {
     companion object {
         private const val USER_URL_PREFIX = "https://github.com/users/"
@@ -40,7 +39,7 @@ class GitHubUser(private val userName: String) {
     }
 
     private fun fetchRawData(connection: HttpURLConnection): Array<String> {
-        val status = connection.responseCode
+        val status: Int = connection.responseCode
         return if (status == HttpURLConnection.HTTP_OK) {
             readInputStream(connection.inputStream)
         } else {
