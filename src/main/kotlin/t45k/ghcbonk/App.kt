@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
-        timer.schedule(timerTask, calendar.time, App.TIME_OF_ONE_DAY);
+        timer.schedule(timerTask, calendar.time, App.TIME_OF_ONE_DAY)
     }
 }
 
