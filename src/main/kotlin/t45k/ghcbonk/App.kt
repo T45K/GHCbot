@@ -4,6 +4,7 @@
 package t45k.ghcbonk
 
 import t45k.ghcbonk.github.GitHubUser
+import t45k.ghcbonk.twitter.Tweeter
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.text.SimpleDateFormat
@@ -24,6 +25,8 @@ class App {
                 val userName = properties.getProperty("userName")
                 val user = GitHubUser(userName)
                 val contributionData = user.fetchContributionData()
+                val tweeter = Tweeter(properties)
+                tweeter.tweet(contributionData)
             }
         }
 
