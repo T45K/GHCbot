@@ -51,7 +51,7 @@ class GitHubUser(private val userName: String) {
         val inputStreamReader = InputStreamReader(inputStream)
         val bufferedReader = BufferedReader(inputStreamReader as Reader?)
         return bufferedReader.lines()
-                .filter { !isNecessaryInformation(it) }
+                .filter { isNecessaryInformation(it) }
                 .toArray<String> { length -> arrayOfNulls(length) }
     }
 
