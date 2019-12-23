@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     // Use the Kotlin JDK 8 standard library.
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
     // Use Logger
     compile 'ch.qos.logback:logback-classic:1.1.3'
@@ -35,5 +35,15 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
 }
 
+jar {
+    // Specify App's entry point
+    manifest {
+        attributes "Main-Class": "t45k.ghcbonk.AppKt"
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } } {
+        exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+    }
+}
+
 // Define the main class for the application.
-mainClassName = 't45k/ghcbonk.AppKt'
+mainClassName = 't45k.ghcbonk.AppKt'
