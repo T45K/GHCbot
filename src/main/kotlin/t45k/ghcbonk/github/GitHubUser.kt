@@ -14,7 +14,7 @@ import kotlin.streams.toList
 
 class GitHubUser(private val userName: String) {
     companion object {
-        private const val USER_URL_PREFIX = "https://github.com/users/"
+        private const val USER_URL_PREFIX = "https://github.com/"
     }
 
     private val userURL: URL
